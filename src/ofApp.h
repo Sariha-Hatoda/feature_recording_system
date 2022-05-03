@@ -15,7 +15,7 @@
 //for Operation-info
 #include "myEvents.hpp"
 
-#define INTERVAL 5
+#define INTERVAL 3
 
 //for Webcam
 #define CAM_W 1920

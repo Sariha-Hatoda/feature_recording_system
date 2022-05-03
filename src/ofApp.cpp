@@ -26,7 +26,6 @@ void ofApp::setup(){
     row.setString(3, "Face_detected");
     row.setString(4, "Face_moved");
     row.setString(5, "Webcam_diff");
-
     row.setString(6, "Mouse_moved");
 
     for ( int i=0; i<MOUSE_EVENT_NUM; i++ ) {
@@ -36,20 +35,16 @@ void ofApp::setup(){
         row.setString(7+MOUSE_EVENT_NUM+i, event.key_data.KeyCodeStr[i]);
     }
     row.setString(7+MOUSE_EVENT_NUM+KEY_NUM, "disp_diff");
-    int counter = 0;
-    for(auto& p : aw.AW_Count){
-        row.setString(8+MOUSE_EVENT_NUM+KEY_NUM+counter,p.first);
-        counter++;
-    }
+    row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+1, "Active_window");
+
     csvRecorder.addRow(row);
-    csvRecorder.save(csvfilestr);
     //開始時刻を記録
     old = ofGetElapsedTimef();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-/*
+
     ssd.update();       //顔検出を更新
     camdiff.update();   //webcam輝度差分を更新
 
@@ -57,20 +52,47 @@ void ofApp::update(){
     sc.update();        //スクショ情報を更新
 
     //eventのみ，コールバック関数内部でupdateを定義
-*/
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-/*
+
     if(isPassed(&old)){
+        //csvファイル内部の初期化
+        row.setInt(0, filenum);
+        row.setString(1, ofGetTimestampString("%H%M%S"));
+        row.setInt(2, ofGetElapsedTimef());
+        row.setInt(3, ssd.facenum);
+        row.setFloat(4, ssd.facemoved);
+        row.setFloat(5, camdiff.diff);
+        row.setFloat(6, event.mouse_data.cursor_moved);
+
+        for ( int i=0; i<MOUSE_EVENT_NUM; i++ ) {
+            row.setInt(7+i, event.mouse_data.EventCount[event.mouse_data.EoIStr[i]]);
+        }
+        for ( int i=0; i<KEY_NUM; i++ ) {
+            row.setInt(7+MOUSE_EVENT_NUM+i, event.key_data.KeyCount[event.key_data.KeyCodeStr[i]]);
+        }
+        row.setFloat(7+MOUSE_EVENT_NUM+KEY_NUM, sc.diff);
+
+        int counter = 0;
+        for(auto& p : aw.AW_Count){
+            row.setString(8+MOUSE_EVENT_NUM+KEY_NUM+counter,p.first);
+            row.setInt(8+MOUSE_EVENT_NUM+KEY_NUM+counter+1, p.second);
+            counter+=2;
+        }
+        csvRecorder.addRow(row);
+        csvRecorder.save(csvfilestr);
+
         ssd.clear();
         camdiff.clear();
         sc.clear();
         aw.clear();
         event.clear();
+        filenum++;
     }
-*/
+
 }
 
 //--------------------------------------------------------------
