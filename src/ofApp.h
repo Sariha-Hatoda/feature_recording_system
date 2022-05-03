@@ -49,6 +49,12 @@ class ofApp : public ofBaseApp{
 
     int old;            //時刻を格納しておく変数
 
+    //for csv-recording
+    ofxCsvRow row;
+    ofxCsv csvRecorder;
+    string csvfilestr;
+    unsigned int filenum;
+
     //指定時間が経過したかどうかを判断する論理関数
     bool isPassed(int* time){
         if((int)ofGetElapsedTimef()-(*time)==INTERVAL){

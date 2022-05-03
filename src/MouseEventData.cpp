@@ -20,7 +20,7 @@ void MouseEventData::update(CGEventRef event, CGEventType type){
     for ( int i=0; i<MOUSE_EVENT_NUM; i++) {
         if(EoI[i]==type){
             EventCount[EoIStr[i]]++;
-            cout<<EoIStr[i]<<":"<<EventCount[EoIStr[i]]<<endl;
+            //cout<<EoIStr[i]<<":"<<EventCount[EoIStr[i]]<<endl;
         }
     }
     //初回の実行の場合，カーソル座標をイベントの座標と同期しフラグを下ろす
@@ -35,7 +35,7 @@ void MouseEventData::update(CGEventRef event, CGEventType type){
         diffX = cursornow.x -cursor.x;
         diffY = cursornow.y -cursor.y;
         cursor_moved += diffX*diffX + diffY*diffY;
-        cout<<"cursor_moved:"<<cursor_moved<<endl;
+        //cout<<"cursor_moved:"<<cursor_moved<<endl;
     }
     cursor = CGEventGetLocation(event);
 }
