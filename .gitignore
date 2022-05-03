@@ -1,0 +1,11 @@
+#gitignore template in oF
+
+#Ignore All
+*
+!*/
+
+#Allowlist
+!.git/*
+!.gitignore
+!.gitattributes
+!src/*
