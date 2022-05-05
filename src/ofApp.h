@@ -26,6 +26,9 @@
 //描画時のリサイズの基準
 #define DRAW_R 0.5
 
+//保存するファイルの上限
+#define MAX_FILES 100
+
 
 class ofApp : public ofBaseApp{
 
@@ -55,11 +58,12 @@ class ofApp : public ofBaseApp{
     myEvents event;     //イベント管理用のクラス
 
     int old;            //時刻を格納しておく変数
+    string start;       //開始時刻をstring型で格納
 
     //for csv-recording
     ofxCsvRow row;
     ofxCsv csvRecorder;
-    string csvfilestr;
+    
     unsigned int filenum;
 
     //指定時間が経過したかどうかを判断する論理関数
@@ -70,5 +74,13 @@ class ofApp : public ofBaseApp{
         }
         else
             return false;
+    };
+
+    //ofAppのウィンドウを収録する関数
+    void savescr(string start, int resize, unsigned int filenum){
+        ofImage savefig;
+        savefig.grabScreen(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+        savefig.resize(savefig.getWidth()/resize, savefig.getHeight()/resize);
+        savefig.save(start+"_images/"+ofToString(filenum%MAX_FILES)+".jpg");
     };
 };

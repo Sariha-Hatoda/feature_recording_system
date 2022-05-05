@@ -9,7 +9,7 @@ void ofApp::setup(){
 
 
     filenum = 0;        //ファイルNo.を0で初期化
-    csvfilestr = ofGetTimestampString("%y%m%d%H%M")+".csv";
+    start = ofGetTimestampString("%y%m%d%H%M");
 
     ssd.init(CAM_W, CAM_H, CAM_R);    //顔検出用
     camdiff.init(CAM_W, CAM_H, CAM_R);//webcam輝度用
@@ -67,7 +67,8 @@ void ofApp::draw(){
     sc.show(ssd.cv_img.width*DRAW_R, 0, ssd.cv_img.height*DRAW_R/sc.drawheight);
 
     if(isPassed(&old)){
-        //csvファイル内部の初期化
+        savescr(start, 2, filenum);
+        //csvファイル内部を更新
         row.setInt(0, filenum);
         row.setString(1, ofGetTimestampString("%H%M%S"));
         row.setInt(2, ofGetElapsedTimef());
@@ -91,7 +92,7 @@ void ofApp::draw(){
             counter+=2;
         }
         csvRecorder.addRow(row);
-        csvRecorder.save(csvfilestr);
+        csvRecorder.save(start+".csv");
 
         ssd.clear();
         camdiff.clear();
