@@ -21,7 +21,7 @@ class MouseEventData{
         void clear(void);
     
         //クラス内部を可視化するメソッド
-        void show(void);
+        void show(int x, int y);
 
         //イベントの座標
         CGPoint cursor;
@@ -30,6 +30,9 @@ class MouseEventData{
         
         //最初の実行かどうかを判断する論理変数
         bool isFirst;
+
+        //イベント番号を格納
+        unsigned int eventNo;
     
         //監視するイベントの列挙
     CGEventType EoI[MOUSE_EVENT_NUM]={

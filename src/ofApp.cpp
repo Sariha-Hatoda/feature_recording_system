@@ -7,7 +7,6 @@ void ofApp::setup(){
     ofSetFrameRate(5);    //フレームレート指定
     font.load("arial.ttf", 72);//ttfフォントをロード
 
-
     filenum = 0;        //ファイルNo.を0で初期化
     start = ofGetTimestampString("%y%m%d%H%M");
 
@@ -37,11 +36,12 @@ void ofApp::setup(){
         row.setString(7+MOUSE_EVENT_NUM+i, event.key_data.KeyCodeStr[i]);
     }
     row.setString(7+MOUSE_EVENT_NUM+KEY_NUM, "disp_diff");
-    row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+1, "Active_window");
+    row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+1, "Window_Changed");
+    row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+2, "Active_window");
 
     csvRecorder.addRow(row);
     
-    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2);
+    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2+100);
 
     //開始時刻を記録
     old = ofGetElapsedTimef();
@@ -55,7 +55,6 @@ void ofApp::update(){
 
     aw.update();        //aw情報を更新
     sc.update();        //スクショ情報を更新
-
     //eventのみ，コールバック関数内部でupdateを定義
 }
 
@@ -65,6 +64,8 @@ void ofApp::draw(){
     ssd.show(0, 0, DRAW_R);
     camdiff.show(0, ssd.cv_img.height*DRAW_R, ssd.cv_img.width*DRAW_R, ssd.cv_img.height*DRAW_R);
     sc.show(ssd.cv_img.width*DRAW_R, 0, ssd.cv_img.height*DRAW_R/sc.drawheight);
+    event.key_data.show(0, ssd.cv_img.height*DRAW_R*2+10);
+    event.mouse_data.show(0, ssd.cv_img.height*DRAW_R*2+50);
 
     if(isPassed(&old)){
         savescr(start, 2, filenum);
@@ -85,10 +86,11 @@ void ofApp::draw(){
         }
         row.setFloat(7+MOUSE_EVENT_NUM+KEY_NUM, sc.diff);
 
+        row.setInt(8+MOUSE_EVENT_NUM+KEY_NUM,aw.winchanged);
         int counter = 0;
         for(auto& p : aw.AW_Count){
-            row.setString(8+MOUSE_EVENT_NUM+KEY_NUM+counter,p.first);
-            row.setInt(8+MOUSE_EVENT_NUM+KEY_NUM+counter+1, p.second);
+            row.setString(9+MOUSE_EVENT_NUM+KEY_NUM+counter,p.first);
+            row.setInt(9+MOUSE_EVENT_NUM+KEY_NUM+counter+1, p.second);
             counter+=2;
         }
         csvRecorder.addRow(row);

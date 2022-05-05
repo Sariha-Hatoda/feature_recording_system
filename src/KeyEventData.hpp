@@ -15,7 +15,7 @@ class KeyEventData{
     public:
         void update(CGEventRef event);
         void clear(void);
-        void show(void);
+        void show(int x, int y);
         unordered_map<string, unsigned int> KeyCount;
         CGKeyCode key;
         string KeyCodeStr[KEY_NUM]{

@@ -18,8 +18,11 @@ void KeyEventData::update(CGEventRef event){
     KeyCount[KeyCodeStr[key]]++;
 }
 
-void KeyEventData::show(){
+void KeyEventData::show(int x, int y){
+    ofDrawBitmapString(ofToString(KeyCodeStr[key]+":"+ofToString(KeyCount[KeyCodeStr[key]])), x, y);
+/*
     for( int i=0; i<KEY_NUM; i++ ){
         cout<<i<<":"<<KeyCodeStr[i]<<":"<<KeyCount[KeyCodeStr[i]]<<endl;
     }
+*/
 }

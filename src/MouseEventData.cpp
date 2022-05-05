@@ -20,6 +20,7 @@ void MouseEventData::update(CGEventRef event, CGEventType type){
     for ( int i=0; i<MOUSE_EVENT_NUM; i++) {
         if(EoI[i]==type){
             EventCount[EoIStr[i]]++;
+            eventNo = i;//イベント番号を格納
             //cout<<EoIStr[i]<<":"<<EventCount[EoIStr[i]]<<endl;
         }
     }
@@ -34,7 +35,7 @@ void MouseEventData::update(CGEventRef event, CGEventType type){
         cursornow = CGEventGetLocation(event);
         diffX = cursornow.x -cursor.x;
         diffY = cursornow.y -cursor.y;
-        cursor_moved += diffX*diffX + diffY*diffY;
+        cursor_moved += sqrt(diffX*diffX+diffY*diffY) ;
         //cout<<"cursor_moved:"<<cursor_moved<<endl;
     }
     cursor = CGEventGetLocation(event);
@@ -48,11 +49,21 @@ void MouseEventData::clear(){
     cursor_moved = 0.0;
 }
 
-void MouseEventData::show(){
+void MouseEventData::show(int x, int y){
+/*
     cout<<"cursor:"<<cursor.x<<","<<cursor.y<<endl;
     cout<<"flag:"<<isFirst<<endl;
     cout<<"cursor_moved:"<<cursor_moved<<endl;
     for ( int i=0; i<MOUSE_EVENT_NUM; i++) {
         cout<<EoIStr[i]<<":\t\t"<<EventCount[EoIStr[i]]<<endl;
     }
+*/
+
+    //ofDrawBitmapString("cursor:"+ofToString(cursor.x)+","+ofToString(cursor.y), x, y);
+    //ofDrawBitmapString("moved:"+ofToString(cursor_moved), x, y+10);
+    stringstream ss;
+    ss << "cursor:" << ofToString(cursor.x)+","+ofToString(cursor.y) << endl;
+    ss << "moved:"+ofToString(cursor_moved) << endl;
+    ss << EoIStr[eventNo]+":"+ofToString(EventCount[EoIStr[eventNo]]) << endl;
+    ofDrawBitmapString(ss.str(), x, y);
 }
