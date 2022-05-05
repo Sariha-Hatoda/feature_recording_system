@@ -15,12 +15,17 @@
 //for Operation-info
 #include "myEvents.hpp"
 
+//エクスポートのインターバル
 #define INTERVAL 3
 
 //for Webcam
 #define CAM_W 1920
 #define CAM_H 1080
 #define CAM_R 3
+
+//描画時のリサイズの基準
+#define DRAW_R 0.5
+
 
 class ofApp : public ofBaseApp{
 
@@ -40,6 +45,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+    ofTrueTypeFont font;//ttfフォント描画用
 
     FaceDetect ssd;     //顔検出を管理するクラス
     WebcamDiff camdiff; //輝度差分抽出を管理するクラス

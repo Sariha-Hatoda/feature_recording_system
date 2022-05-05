@@ -17,6 +17,7 @@ class KeyEventData{
         void clear(void);
         void show(void);
         unordered_map<string, unsigned int> KeyCount;
+        CGKeyCode key;
         string KeyCodeStr[KEY_NUM]{
             "a",
             "s",

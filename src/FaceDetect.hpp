@@ -17,7 +17,7 @@ public:
     void init(int width, int height, int resize);
     void update(void);
     void clear(void);
-    void show(void);
+    void show(int x, int y, float r);
     
     //カメラ映像
     ofVideoGrabber cam;
@@ -26,7 +26,7 @@ public:
     ofImage camframe;
     
     //描画用
-    //ofxCvColorImage cv_img;
+    ofxCvColorImage cv_img;
 
     //描画時のサイズ指定
     int img_w, img_h;
@@ -45,7 +45,8 @@ public:
     ofPoint facenow, faceold;
     //移動量管理と顔中心の描画
     float facemoved;
-    //vector<vector<float>> facevec;
+    //顔中心の集合
+    vector<vector<float>> facevec;
     //最初に実行したことを示すフラグ
     bool isFirst;
 

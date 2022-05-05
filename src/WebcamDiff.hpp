@@ -20,6 +20,7 @@ public:
     void init(int width, int height, int resize);
     void update();
     void clear();
+    void show( int x, int y, int w, int h );
     //webcam映像の取得
 
     ofVideoGrabber camera;

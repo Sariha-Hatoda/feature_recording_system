@@ -15,6 +15,7 @@ class myEvents{
 public:
     void init();
     void clear();
+    void show();
 
     //イベントマスク
     CGEventMask Key_eventMask, Mouse_eventMask;

@@ -89,11 +89,14 @@ void ScreenGrab::clear(){
     diff = 0.0;
 }
 
-void ScreenGrab::show(){
+//描画用のメンバ関数(x座標，y座標，描画の倍率)
+void ScreenGrab::show(int x, int y, float r){
     //ディスプレイの数だけ繰り返す
     for (int i = 0; i < displayCount; i++) {
-        //差分画像の描画
-        ofxCv::drawMat(imgsdiff[i], 0+i*width[i-1], 0, width[i], height[i]);
+        //オリジナル画像の描画
+        ofxCv::drawMat(imgs[i], x+i*width[i-1]*r, y, width[i]*r, height[i]*r);
+        //差分画像の描画(オリジナル画像の高さだけずらして描画)
+        ofxCv::drawMat(imgsdiff[i], x+i*width[i-1]*r, y+drawheight*r, width[i]*r, height[i]*r);
         //画像の解放
         CGImageRelease(imageRef[i]);
     }

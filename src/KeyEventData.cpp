@@ -14,9 +14,8 @@ void KeyEventData::clear(){
 }
 
 void KeyEventData::update(CGEventRef event){
-    CGKeyCode key = CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+    key = CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
     KeyCount[KeyCodeStr[key]]++;
-    //cout<<KeyCodeStr[key]<<":"<<KeyCount[KeyCodeStr[key]]<<endl;
 }
 
 void KeyEventData::show(){

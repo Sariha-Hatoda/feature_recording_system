@@ -49,3 +49,7 @@ void WebcamDiff::update(){
 void WebcamDiff::clear(){
     diff = 0.0;
 }
+
+void WebcamDiff::show( int x, int y, int w, int h ){
+    ofxCv::drawMat(DiffMat, x, y, w, h);
+}

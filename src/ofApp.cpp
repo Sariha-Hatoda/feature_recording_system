@@ -5,8 +5,10 @@ void ofApp::setup(){
     //スタンドアローンビルドのためのおまじない
     ofSetDataPathRoot("../Resources/data/");
     ofSetFrameRate(5);    //フレームレート指定
+    font.load("arial.ttf", 72);//ttfフォントをロード
 
-    filenum = 0;
+
+    filenum = 0;        //ファイルNo.を0で初期化
     csvfilestr = ofGetTimestampString("%y%m%d%H%M")+".csv";
 
     ssd.init(CAM_W, CAM_H, CAM_R);    //顔検出用
@@ -38,6 +40,9 @@ void ofApp::setup(){
     row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+1, "Active_window");
 
     csvRecorder.addRow(row);
+    
+    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2);
+
     //開始時刻を記録
     old = ofGetElapsedTimef();
 }
@@ -52,11 +57,14 @@ void ofApp::update(){
     sc.update();        //スクショ情報を更新
 
     //eventのみ，コールバック関数内部でupdateを定義
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetColor(ofColor::white);
+    ssd.show(0, 0, DRAW_R);
+    camdiff.show(0, ssd.cv_img.height*DRAW_R, ssd.cv_img.width*DRAW_R, ssd.cv_img.height*DRAW_R);
+    sc.show(ssd.cv_img.width*DRAW_R, 0, ssd.cv_img.height*DRAW_R/sc.drawheight);
 
     if(isPassed(&old)){
         //csvファイル内部の初期化

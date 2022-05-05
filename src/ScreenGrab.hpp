@@ -21,7 +21,7 @@ public:
     void init();
     void update();
     void clear();
-    void show();
+    void show(int x, int y, float r);
     
     //マルチディスプレイ操作用
     CGDisplayErr dErr;
