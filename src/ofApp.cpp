@@ -2,10 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
     //スタンドアローンビルドのためのおまじない
     ofSetDataPathRoot("../Resources/data/");
     ofSetFrameRate(5);    //フレームレート指定
-    font.load("arial.ttf", 72);//ttfフォントをロード
+    font.load("arial.ttf", 28);//ttfフォントをロード
 
     filenum = 0;        //ファイルNo.を0で初期化
     start = ofGetTimestampString("%y%m%d%H%M");
@@ -40,8 +41,9 @@ void ofApp::setup(){
     row.setString(7+MOUSE_EVENT_NUM+KEY_NUM+2, "Active_window");
 
     csvRecorder.addRow(row);
+
     
-    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2+100);
+    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2+150);
 
     //開始時刻を記録
     old = ofGetElapsedTimef();
@@ -56,6 +58,7 @@ void ofApp::update(){
     aw.update();        //aw情報を更新
     sc.update();        //スクショ情報を更新
     //eventのみ，コールバック関数内部でupdateを定義
+
 }
 
 //--------------------------------------------------------------
@@ -103,7 +106,6 @@ void ofApp::draw(){
         event.clear();
         filenum++;
     }
-
 }
 
 //--------------------------------------------------------------

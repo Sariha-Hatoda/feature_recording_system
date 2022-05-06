@@ -5,8 +5,9 @@
 //for Webcam-info
 #include "FaceDetect.hpp"
 #include "WebcamDiff.hpp"
-#include "ofxGraph.h"   //for Graph
 #include "ofxCsv.h"     //for Csv
+
+//#include "ofxGraph.h"   //for Graph
 
 //for Display-info
 #include "ActiveWindow.hpp"
@@ -16,7 +17,7 @@
 #include "myEvents.hpp"
 
 //エクスポートのインターバル
-#define INTERVAL 3
+#define INTERVAL 20
 
 //for Webcam
 #define CAM_W 1920

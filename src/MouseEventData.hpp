@@ -34,6 +34,9 @@ class MouseEventData{
         //イベント番号を格納
         unsigned int eventNo;
     
+        //ttfフォント描画用
+        ofTrueTypeFont font;
+
         //監視するイベントの列挙
     CGEventType EoI[MOUSE_EVENT_NUM]={
         kCGEventMouseMoved,

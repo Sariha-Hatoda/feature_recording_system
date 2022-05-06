@@ -12,6 +12,7 @@ void MouseEventData::init(){
     cursor.x = 0.0;
     cursor.y = 0.0;
     isFirst = true;
+    font.load("arial.ttf", 28);
 }
 
 //イベント発生時の更新処理
@@ -65,5 +66,6 @@ void MouseEventData::show(int x, int y){
     ss << "cursor:" << ofToString(cursor.x)+","+ofToString(cursor.y) << endl;
     ss << "moved:"+ofToString(cursor_moved) << endl;
     ss << EoIStr[eventNo]+":"+ofToString(EventCount[EoIStr[eventNo]]) << endl;
-    ofDrawBitmapString(ss.str(), x, y);
+    //ofDrawBitmapString(ss.str(), x, y);
+    font.drawString(ss.str(), x, y);
 }
