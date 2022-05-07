@@ -21,7 +21,7 @@ void FaceDetect::init(int width, int height, int resize){
     //顔検出用ファイルパスを指定
     prototxt = "../Resources/data/deploy.prototxt";
     model = "../Resources/data/res10_300x300_ssd_iter_140000_fp16.caffemodel";
-    
+
     //dnnモデルを指定
     net = cv::dnn::readNetFromCaffe(prototxt, model);
 
@@ -34,30 +34,40 @@ void FaceDetect::init(int width, int height, int resize){
     facenum = 0;
 
     isFirst = true;
+
+    detect_counter = 0;
 }
 
 void FaceDetect::update(){
+    detect_counter++;
     cam.update();
 
     if (cam.isFrameNew()){
-        //顔検出に渡す側のフレーム
-        camframe.setFromPixels(cam.getPixels().getData(), img_w, img_h, OF_IMAGE_COLOR);
         //描画に使う側のフレーム
         cv_img.setFromPixels(cam.getPixels().getData(), img_w, img_h);
-        
-        //dnnに渡す画像を300x300にリサイズ
-        camframe.resize(300, 300);
 
-        //顔検出の下準備
-        inputBlob = cv::dnn::blobFromImage(ofxCv::toCv(camframe));
-        net.setInput(inputBlob, "data");
-        detection = net.forward("detection_out");
+        //5フレームに1回の検出に低減
+        if(detect_counter>=5){
+            //顔検出に渡す側のフレーム
+            camframe.setFromPixels(cam.getPixels().getData(), img_w, img_h, OF_IMAGE_COLOR);
+            
+            //dnnに渡す画像を300x300にリサイズ
+            camframe.resize(300, 300);
+
+            //顔検出の実行
+            inputBlob = cv::dnn::blobFromImage(ofxCv::toCv(camframe));
+            net.setInput(inputBlob, "data");
+            detection = net.forward("detection_out");
+
+            //カウンタをリセット
+            detect_counter = 0;
+        }
     }
 
     //検出された顔の数を初期化
     facenum = 0;
 
-    //顔検出の実行
+    //顔検出結果にアクセス
     cv::Mat detectionMat(detection.size[2], detection.size[3], CV_32F, detection.ptr<float>());
 
     //描画色の指定

@@ -50,6 +50,9 @@ public:
     //最初に実行したことを示すフラグ
     bool isFirst;
 
+    //顔検出の実行可否を決めるカウンタ
+    int detect_counter;
+
 private:
 };
 

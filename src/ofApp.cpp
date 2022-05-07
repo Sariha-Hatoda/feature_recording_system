@@ -5,7 +5,7 @@ void ofApp::setup(){
 
     //スタンドアローンビルドのためのおまじない
     ofSetDataPathRoot("../Resources/data/");
-    ofSetFrameRate(5);    //フレームレート指定
+    ofSetFrameRate(15);    //フレームレート指定
     font.load("arial.ttf", 28);//ttfフォントをロード
 
     filenum = 0;        //ファイルNo.を0で初期化
