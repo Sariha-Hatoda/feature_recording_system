@@ -65,7 +65,7 @@ void FaceDetect::update(){
     }
 
     //検出された顔の数を初期化
-    facenum = 0;
+    //facenum = 0;
 
     //顔検出結果にアクセス
     cv::Mat detectionMat(detection.size[2], detection.size[3], CV_32F, detection.ptr<float>());
@@ -122,6 +122,7 @@ void FaceDetect::update(){
 void FaceDetect::clear(){
     facevec.clear();
     facemoved = 0;
+    facenum = 0;
 }
 
 void FaceDetect::show(int x, int y, float r){
