@@ -47,7 +47,7 @@ void FaceDetect::update(){
         cv_img.setFromPixels(cam.getPixels().getData(), img_w, img_h);
 
         //5フレームに1回の検出に低減
-        if(detect_counter>=5){
+        if(detect_counter>=4){
             //顔検出に渡す側のフレーム
             camframe.setFromPixels(cam.getPixels().getData(), img_w, img_h, OF_IMAGE_COLOR);
             
