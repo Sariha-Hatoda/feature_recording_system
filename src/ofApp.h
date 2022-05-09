@@ -50,7 +50,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-    ofTrueTypeFont font;//ttfフォント描画用
+    //ofTrueTypeFont font;//ttfフォント描画用
 
     FaceDetect ssd;     //顔検出を管理するクラス
     WebcamDiff camdiff; //輝度差分抽出を管理するクラス

@@ -35,7 +35,7 @@ class MouseEventData{
         unsigned int eventNo;
     
         //ttfフォント描画用
-        ofTrueTypeFont font;
+        //ofTrueTypeFont font;
 
         //監視するイベントの列挙
     CGEventType EoI[MOUSE_EVENT_NUM]={

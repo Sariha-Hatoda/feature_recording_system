@@ -6,7 +6,7 @@ void ofApp::setup(){
     //スタンドアローンビルドのためのおまじない
     ofSetDataPathRoot("../Resources/data/");
     ofSetFrameRate(5);    //フレームレート指定
-    font.load("arial.ttf", 28);//ttfフォントをロード
+    //font.load("arial.ttf", 28);//ttfフォントをロード
 
     filenum = 0;        //ファイルNo.を0で初期化
     start = ofGetTimestampString("%y%m%d%H%M");
@@ -43,7 +43,8 @@ void ofApp::setup(){
     csvRecorder.addRow(row);
 
     
-    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2+150);
+    ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2);
+    //ofSetWindowShape(640*DRAW_R+sc.drawwidth*360*DRAW_R/sc.drawheight, 360*DRAW_R*2+150);
 
     //開始時刻を記録
     old = ofGetElapsedTimef();
@@ -67,8 +68,8 @@ void ofApp::draw(){
     ssd.show(0, 0, DRAW_R);
     camdiff.show(0, ssd.cv_img.height*DRAW_R, ssd.cv_img.width*DRAW_R, ssd.cv_img.height*DRAW_R);
     sc.show(ssd.cv_img.width*DRAW_R, 0, ssd.cv_img.height*DRAW_R/sc.drawheight);
-    event.key_data.show(0, ssd.cv_img.height*DRAW_R*2+10);
-    event.mouse_data.show(0, ssd.cv_img.height*DRAW_R*2+50);
+    //event.key_data.show(0, ssd.cv_img.height*DRAW_R*2+10);
+    //event.mouse_data.show(0, ssd.cv_img.height*DRAW_R*2+50);
 
     if(isPassed(&old)){
         savescr(start, 2, filenum);
