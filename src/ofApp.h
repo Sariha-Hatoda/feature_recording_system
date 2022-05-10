@@ -17,12 +17,12 @@
 #include "myEvents.hpp"
 
 //エクスポートのインターバル
-#define INTERVAL 20
+#define INTERVAL 10
 
 //for Webcam
-#define CAM_W 1920
-#define CAM_H 1080
-#define CAM_R 3
+//#define CAM_W 1920
+//#define CAM_H 1080
+//#define CAM_R 3
 
 //描画時のリサイズの基準
 #define DRAW_R 0.5

@@ -11,8 +11,8 @@ void ofApp::setup(){
     filenum = 0;        //ファイルNo.を0で初期化
     start = ofGetTimestampString("%y%m%d%H%M");
 
-    ssd.init(CAM_W, CAM_H, CAM_R);    //顔検出用
-    camdiff.init(CAM_W, CAM_H, CAM_R);//webcam輝度用
+    ssd.init(2);    //顔検出用
+    camdiff.init(2);//webcam輝度用
 
     aw.init();    //aw情報を初期化
     sc.init();    //scの初期化
@@ -44,6 +44,7 @@ void ofApp::setup(){
 
     
     ofSetWindowShape(ssd.cv_img.width*DRAW_R+sc.drawwidth*ssd.cv_img.height*DRAW_R/sc.drawheight, ssd.cv_img.height*DRAW_R*2);
+
     //ofSetWindowShape(640*DRAW_R+sc.drawwidth*360*DRAW_R/sc.drawheight, 360*DRAW_R*2+150);
 
     //開始時刻を記録

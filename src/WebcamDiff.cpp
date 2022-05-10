@@ -6,14 +6,14 @@
 //
 
 #include "WebcamDiff.hpp"
-void WebcamDiff::init(int width, int height, int resize){
-    //画像のサイズは，アスペクト比を保ったままリサイズ
-    img_w = width  / resize;
-    img_h = height / resize;
-
+void WebcamDiff::init(int resize){
     //カメラ解像度の初期化
     camera.setDeviceID(0);
-    camera.setup(img_w, img_h);
+    camera.setup(camera.getWidth(), camera.getHeight());
+
+    //画像のサイズは，アスペクト比を保ったままリサイズ
+    img_w = camera.getWidth()  / resize;
+    img_h = camera.getHeight() / resize;
 
     //実行後最初の処理かどうかを管理するフラグ
     isFirst = true;
@@ -28,7 +28,7 @@ void WebcamDiff::update(){
     
     //ofImageにコンバート
     image.setFromPixels(camera.getPixels().getData(), img_w, img_h, OF_IMAGE_COLOR);
-    image.resize(img_w/DIFF_R, img_h/DIFF_R);
+    image.resize(img_w, img_h);
 
     //cv::Matに変換
     immat = ofxCv::toCv(image);

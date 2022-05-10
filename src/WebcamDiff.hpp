@@ -12,12 +12,10 @@
 #include "ofxOpenCv.h"
 #include "ofxCv.h"
 
-//カメラ映像の解像度からどの程度さらに低減させるか．
-#define DIFF_R 8
 
 class WebcamDiff{
 public:
-    void init(int width, int height, int resize);
+    void init(int resize);
     void update();
     void clear();
     void show( int x, int y, int w, int h );

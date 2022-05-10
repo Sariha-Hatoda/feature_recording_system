@@ -6,13 +6,13 @@
 //
 
 #include "FaceDetect.hpp"
-void FaceDetect::init(int width, int height, int resize){
-    
-    //描画用のサイズを指定
-    img_w = width /resize;
-    img_h = height/resize;
+void FaceDetect::init(int resize){
+    cam.setup(cam.getWidth(), cam.getHeight());
 
-    cam.setup(img_w, img_h);
+    //描画用のサイズを指定
+    img_w = cam.getWidth()  / resize;
+    img_h = cam.getHeight() / resize;
+
     limit = 0.3;
 
     //描画用データの格納領域確保
@@ -44,12 +44,13 @@ void FaceDetect::update(){
 
     if (cam.isFrameNew()){
         //描画に使う側のフレーム
-        cv_img.setFromPixels(cam.getPixels().getData(), img_w, img_h);
+        cv_img.setFromPixels(cam.getPixels().getData(), cam.getWidth(),cam.getHeight());
+        cv_img.resize(img_w, img_h);
 
         //5フレームに1回の検出に低減
         if(detect_counter>=4){
             //顔検出に渡す側のフレーム
-            camframe.setFromPixels(cam.getPixels().getData(), img_w, img_h, OF_IMAGE_COLOR);
+            camframe.setFromPixels(cam.getPixels().getData(), cam.getWidth(), cam.getHeight(), OF_IMAGE_COLOR);
             
             //dnnに渡す画像を300x300にリサイズ
             camframe.resize(300, 300);
@@ -63,9 +64,6 @@ void FaceDetect::update(){
             detect_counter = 0;
         }
     }
-
-    //検出された顔の数を初期化
-    //facenum = 0;
 
     //顔検出結果にアクセス
     cv::Mat detectionMat(detection.size[2], detection.size[3], CV_32F, detection.ptr<float>());

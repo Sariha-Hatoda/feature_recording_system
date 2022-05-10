@@ -14,7 +14,7 @@
 
 class FaceDetect{
 public:
-    void init(int width, int height, int resize);
+    void init(int resize);
     void update(void);
     void clear(void);
     void show(int x, int y, float r);
