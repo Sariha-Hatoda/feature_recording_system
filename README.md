@@ -12,12 +12,12 @@
 *Xcodeでビルドします．その際，stand-aloneにするべくXcodeの以下の設定を施してください．
 
 *cp -r bin/data "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources";
-** For OF < 0.8 call ofSetDataPathRoot(“../Resources/”); in setup(), ofApp.cpp.
-** and for OF >= 0.8 call ofSetDataPathRoot("../Resources/data/"); in setup(), ofApp.cpp
+* For OF < 0.8 call ofSetDataPathRoot(“../Resources/”); in setup(), ofApp.cpp.
+* and for OF >= 0.8 call ofSetDataPathRoot("../Resources/data/"); in setup(), ofApp.cpp
 
 *また，Project Settingsからビルド設定を変更してください．しないとエラーになります．webcamが接続されていない場合でもエラーになります．
 *実行時に，スクリーンショットとキーログの許可を求められるので，システム環境設定から許可してください．
 *上記の手順で実行できない場合は私宛に連絡をください．
-**hisarahatoda@gmail.com
+*hisarahatoda@gmail.com
 
 *ofApp.hppの最初に各パラメタを設定しています．csv書き出しのインターバル，フレームレートなどの数値などです．
